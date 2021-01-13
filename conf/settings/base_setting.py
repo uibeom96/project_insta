@@ -3,25 +3,7 @@ from django.core.exceptions import ImproperlyConfigured
 import json
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-with open("secret.json", "r", encoding="UTF-8") as file:
-    secret_list = json.loads(file.read())
-
-def get_secret_key(key, secret_list=secret_list):
-    try:
-        return secret_list[key]
-    except KeyError:
-       raise ImproperlyConfigured("{}의 키 오류 입니다. ".format(key))
-
-
-SECRET_KEY = get_secret_key("secret_DJANGO")
-
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 INSTALLED_APPS = [
@@ -31,7 +13,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,7 +32,7 @@ ROOT_URLCONF = 'conf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,16 +45,8 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'conf.wsgi.application'
-
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 
@@ -89,7 +65,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTH_USER_MODEL = 'users.User'
 
 LANGUAGE_CODE = 'ko'
 
