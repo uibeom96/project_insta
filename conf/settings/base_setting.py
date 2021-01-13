@@ -13,8 +13,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
     'users.apps.UsersConfig',
     'base.apps.BaseConfig',
+    'dista.apps.DistaConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 
@@ -81,3 +84,4 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [ BASE_DIR / 'static' ]
