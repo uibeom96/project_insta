@@ -13,7 +13,13 @@ class UserForm(forms.ModelForm):
             "username": "아이디",
             }
     
-    
+    def clean_nick_name(self):
+        check = self.cleaned_data.get("nick_name")
+        if User.objects.filter(nick_name=check):
+            raise forms.ValidationError("이미 존재하는 닉네임 이에요") 
+        return check
+
+
     def clean_password2(self):
         check = self.cleaned_data
         if check.get("password") != check.get("password2"):
