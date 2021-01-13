@@ -9,7 +9,8 @@ class User(AbstractUser, BaseModel):
 
     class Meta:
         db_table = "users"
-
+        verbose_name = "회원"
+        verbose_name_plural = "회원정보"
 
     def __str__(self):
         return self.username

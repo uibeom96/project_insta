@@ -27,3 +27,11 @@ DATABASES = {
         "PORT":     get_secret_key("secret_deploy_PORT"),
     }
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = get_secret_key("secret_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_secret_key("secret_EMAIL_HOST_PASSWORD")
+EMAIL_HOST = get_secret_key("secret_EMAIL_HOST") 		
+EMAIL_PORT = get_secret_key("secret_EMAIL_PORT")
+DEFAULT_FROM_EMAIL = "EMAIL_HOST_USER"
+EMAIL_USE_TLS = True		

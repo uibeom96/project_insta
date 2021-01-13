@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required
+def dista_main(request):
+    return render(request, "dista/dista_main.html")
+
