@@ -2,10 +2,22 @@
 
 {% block title %}회원가입 페이지{% endblock %}
 {% block content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {% load bootstrap4 %}
-    {% bootstrap_form form %}
-    <input type="submit" value="회원가입">
-</form>
+<br><br>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center" style="padding-bottom: 50px;">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% load bootstrap4 %}
+                    {% bootstrap_form form %}
+                    <input class="btn btn-success" type="submit" value="회원가입">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
 {% endblock %}
