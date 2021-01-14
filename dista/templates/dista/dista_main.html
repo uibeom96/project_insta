@@ -12,11 +12,11 @@
                 {{ post.author }}님  {{ post.created | timesince }}, 전 작성
             </div>
             <div class="card-body">
-                <img src="{{ post.image.url }}" width="100%"><hr>
+                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" width="100%"></a><hr>
                 <p style="color: blue";>{{ post.hash_tag }}</p>
 
                 {% load static %}
-                <a href="#"><img src="{% static 'img/프로필.png' %}"></a>
+                <a href="{% url 'dista:dista_profile' post.author.id %}"><img src="{% static 'img/프로필.png' %}"></a>
                 <button class="btn btn-white">
                     <img src="{% static 'img/좋아요.png' %}"> {{ post.like|length}}
                 </button>

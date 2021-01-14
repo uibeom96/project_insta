@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}메인 페이지{% endblock %}
+{% block content %}
+<br><br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                닉네임 : {{ user.nick_name }} <br>
+                아이디 : {{ user.username }} <br>
+                팔로워 : {{ user.follower|length }}명
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <p class="alert alert-success text-center">{{ user }}님이 작성한 글 목록 입니다.</p>
+        {% for post in posts %}
+        <div class="card">
+            <div class="card-body">
+                    {% load static %}
+                    <a href="{{ post.get_absolute_url }}">{{ post.hash_tag }}</a>
+                    <img src="{% static 'img/좋아요.png' %}"> {{ post.likes|length}}
+                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_likes|length}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

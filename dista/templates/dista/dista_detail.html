@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}메인 페이지{% endblock %}
+{% block content %}
+<br><br>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body badge badge-secondary" >
+                {{ post.author }}님  {{ post.created | timesince }}, 전 작성
+            </div>
+            <div class="card-body">
+                <img src="{{ post.image.url }}" width="100%"><hr>
+                <p style="color: blue";>{{ post.hash_tag }}</p>
+
+                {% load static %}
+                <a href="{% url 'dista:dista_profile' post.author.id %}"><img src="{% static 'img/프로필.png' %}"></a>
+                <button class="btn btn-white">
+                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like|length}}
+                </button>
+                <button class="btn btn-white">
+                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like|length}}
+                </button>
+                <hr>
+                {% if post.author == request.user %}
+                    <a href="{% url 'dista:dista_update' post.pk  %}" style="color: green;">수정</a>
+                    <a href="{% url 'dista:dista_delete' post.pk  %}" style="color: red;">삭제</a>
+                {% endif %} <br>
+                모든 댓글 : {{post.comments.all|length}}개
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}
