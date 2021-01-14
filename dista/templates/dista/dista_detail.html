@@ -16,12 +16,15 @@
 
                 {% load static %}
                 <a href="{% url 'dista:dista_profile' post.author.id %}"><img src="{% static 'img/프로필.png' %}"></a>
-                <button class="btn btn-white">
-                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like|length}}
+                <button id="{{ post.id }}" onclick="click_like(this.id)" class="btn btn-white">
+                    <img src="{% static 'img/좋아요.png' %}">
+                    <span id="like_count">{{post.like.all|length}}</span>
                 </button>
-                <button class="btn btn-white">
-                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like|length}}
+                <button id="{{ post.id }}" onclick="click_dis_like(this.id)" class="btn btn-white">
+                    <img src="{% static 'img/싫어요.png' %}">
+                    <span id="dis_like_count">{{ post.dis_like.all|length}}</span>
                 </button>
+                <h7 id="message"></h7>
                 <hr>
                 {% if post.author == request.user %}
                     <a href="{% url 'dista:dista_update' post.pk  %}" style="color: green;">수정</a>
@@ -51,4 +54,41 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function click_like(post_id) {
+        $.ajax({
+            url: "{% url 'dista:dista_like' %}",
+            data: {
+                "post_id": post_id
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#like_count').html(response.like_count)
+                $('#message').html(response.message)
+            }
+        })
+    }
+</script>
+
+<script>
+    function click_dis_like(post_id) {
+        $.ajax({
+            url: "{% url 'dista:dista_dis_like' %}",
+            data: {
+                "post_id": post_id
+            },
+            dataType: "json",
+            success: function (response) {
+                $("#dis_like_count").html(response.dis_like_count)
+                $("#message").html(response.message)
+            }
+        })
+    }
+
+
+</script>
+
 {% endblock %}

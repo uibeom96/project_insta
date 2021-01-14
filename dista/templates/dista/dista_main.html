@@ -17,12 +17,8 @@
 
                 {% load static %}
                 <a href="{% url 'dista:dista_profile' post.author.id %}"><img src="{% static 'img/프로필.png' %}"></a>
-                <button class="btn btn-white">
-                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like|length}}
-                </button>
-                <button class="btn btn-white">
-                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like|length}}
-                </button>
+                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like.all|length }}
+                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like.all|length}}
                 <hr>
                 {% if post.author == request.user %}
                     <a href="{% url 'dista:dista_update' post.pk  %}" style="color: green;">수정</a>

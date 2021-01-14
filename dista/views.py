@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from dista.models import Post, Comment
 from users.models import User
 from dista.forms import PostForm, CommentForm
-
+from django.http import HttpResponse
+import json
 
 @login_required
 def dista_main(request):
@@ -63,3 +64,40 @@ def dista_profile(request, pk):
     print(posts)
     return render(request, "dista/dista_profile.html", {"user": user, "posts": posts})
 
+
+def dista_like(request):
+    if request.is_ajax():
+        post_id = request.GET.get("post_id")
+        post = Post.objects.get(id=post_id)
+    if not request.user.is_authenticated:
+        message = "로그인을 해주세욥"
+        context = {"like_count": post.like.count(), "message": message}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+    if request.user in post.like.all():
+        post.like.remove(request.user)
+        message = "좋아요를 취소합니다."
+    else: 
+        post.like.add(request.user)
+        message = "좋아요를 눌렀습니다."
+    context = {'like_count' : post.like.count(), "message":message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+def dista_dis_like(request):
+    if request.is_ajax():
+        post = Post.objects.get(id=request.GET.get("post_id"))
+    
+    if not request.user.is_authenticated:
+        message = "로그인을 해주세요"
+        context = {"dis_like_count": post.dis_like.count(), "message": message}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+    if request.user in post.dis_like.all():
+        post.dis_like.remove(request.user)
+        message = "싫어요를 취소합니다"
+    else:
+        post.dis_like.add(request.user)
+        message = "싫어요를 눌렀습니다"
+
+    context = {"dis_like_count": post.dis_like.count(), "message": message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
