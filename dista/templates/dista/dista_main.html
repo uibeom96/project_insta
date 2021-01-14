@@ -13,8 +13,22 @@
             </div>
             <div class="card-body">
                 <img src="{{ post.image.url }}" width="100%"><hr>
-                좋아요 : 0개 싫어요 : 0개 <br>
-                댓글 0개 
+                <p style="color: blue";>{{ post.hash_tag }}</p>
+
+                {% load static %}
+                <a href="#"><img src="{% static 'img/프로필.png' %}"></a>
+                <button class="btn btn-white">
+                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like|length}}
+                </button>
+                <button class="btn btn-white">
+                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like|length}}
+                </button>
+                <hr>
+                {% if post.author == request.user %}
+                    <a href="{% url 'dista:dista_update' post.pk  %}" style="color: green;">수정</a>
+                    <a href="{% url 'dista:dista_delete' post.pk  %}" style="color: red;">삭제</a>
+                {% endif %} <br>
+                모든 댓글 : {{post.comments.all|length}}개
             </div>
         </div>
         {% endfor %} 

@@ -1,12 +1,13 @@
 from django.db import models
 from base.models import BaseModel
 from django.conf import settings
+from django.shortcuts import reverse
 
 
 class Post(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="Photo/%Y-%m-%d")
-    hash_tag = models.CharField(max_length=30)
+    hash_tag = models.CharField(max_length=30, help_text="해쉬태그는 #를 따로 쓰지마세요 공백으로 자동구분 됩니다.")
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likes", blank=True) 
     dis_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dis_likes", blank=True) 
     follower = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followers" ,blank=True)
@@ -20,6 +21,9 @@ class Post(BaseModel):
 
     def __str__(self):
         return str(self.author)+"의 글"
+
+    def get_absolute_url(self):
+        return reverse("dista:dista_detail", args=[self.pk])
 
 class Comment(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
