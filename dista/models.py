@@ -26,8 +26,9 @@ class Post(BaseModel):
         return reverse("dista:dista_detail", args=[self.pk])
 
 class Comment(BaseModel):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="posts")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    comment = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="comments")
+    comment = models.CharField(max_length=100)
 
     class Meta:
         ordering = ("-created", )

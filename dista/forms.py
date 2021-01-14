@@ -1,5 +1,5 @@
 from django import forms
-from dista.models import Post
+from dista.models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -11,3 +11,8 @@ class PostForm(forms.ModelForm):
         check = self.cleaned_data.get("hash_tag")
         check = check.replace(" ", " #")
         return "#"+check
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("comment", )

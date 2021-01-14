@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from dista.models import Post
+from dista.models import Post, Comment
 from users.models import User
-from dista.forms import PostForm
+from dista.forms import PostForm, CommentForm
 
 
 @login_required
@@ -47,7 +47,14 @@ def dista_delete(request, pk):
 
 def dista_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
-    return render(request, "dista/dista_detail.html", {"post": post})
+    comment_list = Comment.objects.filter(post=post, is_deleted=False)
+    if request.method == "POST":
+        data = Comment.objects.create(
+            post=post,
+            author=request.user,
+            comment=request.POST.get("comment"))
+        data.save()
+    return render(request, "dista/dista_detail.html", {"post": post, "comment_list": comment_list})
 
 
 def dista_profile(request, pk):
@@ -55,3 +62,4 @@ def dista_profile(request, pk):
     posts = Post.objects.filter(author=user, is_deleted=False)
     print(posts)
     return render(request, "dista/dista_profile.html", {"user": user, "posts": posts})
+

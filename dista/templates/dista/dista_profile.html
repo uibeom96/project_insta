@@ -10,6 +10,10 @@
                 닉네임 : {{ user.nick_name }} <br>
                 아이디 : {{ user.username }} <br>
                 팔로워 : {{ user.follower|length }}명
+                <hr>
+                {% if user.nick_name != request.user.nick_name %}
+                <a href="">팔로윙</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -26,6 +30,8 @@
         </div>
         {% endfor %}
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        
+    </div>
 </div>
 {% endblock %}
