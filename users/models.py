@@ -1,10 +1,11 @@
 from base.models import BaseModel
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.conf import settings
 
 class User(AbstractUser, BaseModel):
     nick_name = models.CharField(max_length=10)
+    following = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followings", blank=True)
 
 
     class Meta:

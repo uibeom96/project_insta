@@ -9,23 +9,24 @@
             <div class="card-body text-center">
                 닉네임 : {{ user.nick_name }} <br>
                 아이디 : {{ user.username }} <br>
-                팔로워 : {{ user.follower|length }}명
+                팔로워 : <h7 id="following_count">{{ user.following.all|length }}</h7>명<br>
                 <hr>
                 {% if user.nick_name != request.user.nick_name %}
-                <a href="">팔로윙</a>
-                {% endif %}
+                <button id="{{ user.id }}" onclick="following_click(this.id)" class="btn btn-info">팔로잉</button>
+                {% endif %} <br>
+                <h7 id="message"></h7>
             </div>
         </div>
     </div>
     <div class="col-md-5">
-        <p class="alert alert-success text-center">{{ user }}님이 작성한 글 목록 입니다.</p>
+        <p class="alert alert-success text-center">{{ user.nick_name }} 님이 작성한 글 목록 입니다.</p>
         {% for post in posts %}
         <div class="card">
             <div class="card-body">
                     {% load static %}
                     <a href="{{ post.get_absolute_url }}">{{ post.hash_tag }}</a>
-                    <img src="{% static 'img/좋아요.png' %}"> {{ post.likes|length}}
-                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_likes|length}}
+                    <img src="{% static 'img/좋아요.png' %}"> {{ post.like.all|length}}
+                    <img src="{% static 'img/싫어요.png' %}"> {{ post.dis_like.all|length}}
             </div>
         </div>
         {% endfor %}
@@ -34,4 +35,22 @@
         
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function following_click(user_id) {
+        $.ajax({
+            url: "{% url 'dista:dista_following' %}",
+            data: {
+                "user_id": user_id
+            },
+            dataType: "json",
+            success: function (response) {
+                $('#following_count').html(response.following_count)
+                $('#message').html(response.message)
+            }
+        })
+    }
+</script>
 {% endblock %}

@@ -12,5 +12,6 @@ urlpatterns = [
     path("profile/<int:pk>", views.dista_profile, name="dista_profile"),
     path("likes/", views.dista_like, name="dista_like"),
     path("dis_likes/", views.dista_dis_like, name="dista_dis_like"),
+    path("following/", views.dista_following, name="dista_following"),
     path("", views.dista_main, name="dista_main"),
 ]

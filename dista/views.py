@@ -61,7 +61,6 @@ def dista_detail(request, pk):
 def dista_profile(request, pk):
     user = get_object_or_404(User, id=pk)
     posts = Post.objects.filter(author=user, is_deleted=False)
-    print(posts)
     return render(request, "dista/dista_profile.html", {"user": user, "posts": posts})
 
 
@@ -94,10 +93,36 @@ def dista_dis_like(request):
 
     if request.user in post.dis_like.all():
         post.dis_like.remove(request.user)
-        message = "싫어요를 취소합니다"
+        message = "싫어요를 취소합니다."
     else:
         post.dis_like.add(request.user)
-        message = "싫어요를 눌렀습니다"
+        message = "싫어요를 눌렀습니다."
 
     context = {"dis_like_count": post.dis_like.count(), "message": message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+def dista_following(request):
+    pass
+    if request.is_ajax():
+        user = User.objects.get(id=request.GET.get("user_id"))
+
+    if not request.user.is_authenticated:
+        message = "로그인을 해주세요"
+        context = {"following_count": user.following.count(), "message": message}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+
+    if request.user == user:
+        message = "자기 자신을 팔로잉 할순 없습니다"
+        context = {"following_count": user.following.count(), "message": message}
+        return HttpResponse(json.dumps(context), content_type="application/json")
+    
+    if request.user in user.following.all():
+        user.following.remove(request.user)
+        message = "팔로잉이 끊어졌어요"
+    else:
+        user.following.add(request.user)
+        message = "팔로잉이 맺어졌어요"
+
+    context = {"following_count": user.following.count(), "message": message}
+    print(context)
     return HttpResponse(json.dumps(context), content_type="application/json")

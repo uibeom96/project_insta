@@ -10,8 +10,6 @@ class Post(BaseModel):
     hash_tag = models.CharField(max_length=30, help_text="해쉬태그는 #를 따로 쓰지마세요 공백으로 자동구분 됩니다.")
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likes", blank=True) 
     dis_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dis_likes", blank=True) 
-    follower = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followers" ,blank=True)
-    following = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followings", blank=True)
 
     class Meta:
         ordering = ("-created", )

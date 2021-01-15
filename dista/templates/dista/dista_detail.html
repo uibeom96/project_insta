@@ -24,7 +24,7 @@
                     <img src="{% static 'img/싫어요.png' %}">
                     <span id="dis_like_count">{{ post.dis_like.all|length}}</span>
                 </button>
-                <h7 id="message"></h7>
+                <br><h7 class="badge badge-secondary" id="message"></h7>
                 <hr>
                 {% if post.author == request.user %}
                     <a href="{% url 'dista:dista_update' post.pk  %}" style="color: green;">수정</a>
