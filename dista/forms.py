@@ -9,7 +9,15 @@ class PostForm(forms.ModelForm):
 
     def clean_hash_tag(self):
         check = self.cleaned_data.get("hash_tag")
-        check = check.replace(" ", " #")
+        check1 = ""
+        for i in check:
+            if i == "#":
+                del(i)
+            else:
+                check1 += i
+        print(check1)
+        
+        check = check1.replace(" ", " #")
         return "#"+check
 
 class CommentForm(forms.ModelForm):
