@@ -15,6 +15,9 @@ HTML / CSS / JS 는 백엔드 개발 포커스에 맞게 최대한 간단하게 
 - 좋아요 / 싫어요 기능
 
 <img src="https://user-images.githubusercontent.com/76981768/106838555-e1fb1200-66df-11eb-907e-6d6b83726d25.png" width="500" height="300">
+![댓글](https://user-images.githubusercontent.com/76981768/106841697-ef1aff80-66e5-11eb-80c1-b0d5ec23faeb.png)
+![로그인](https://user-images.githubusercontent.com/76981768/106841705-f215f000-66e5-11eb-8f32-8c9bcf957d31.png)
+![메인페이지](https://user-images.githubusercontent.com/76981768/106841711-f3471d00-66e5-11eb-9b9a-e6bd9972385b.png)
 
 
 해당 프로젝트는 python / Django 로 개발하였습니다.  
