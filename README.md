@@ -14,7 +14,7 @@ HTML / CSS / JS 는 백엔드 개발 포커스에 맞게 최대한 간단하게 
 - 팔로워 / 해쉬테그 
 - 좋아요 / 싫어요 기능
 
-<img src="" > </img>
+<img src="https://user-images.githubusercontent.com/76981768/106838555-e1fb1200-66df-11eb-907e-6d6b83726d25.png" width="500" height="300">
 
 
 해당 프로젝트는 python / Django 로 개발하였습니다.  
