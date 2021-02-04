@@ -14,8 +14,8 @@ HTML / CSS / JS 는 백엔드 개발 포커스에 맞게 최대한 간단하게 
 - 팔로워 / 해쉬테그 
 - 좋아요 / 싫어요 기능
 
-<img src="https://user-images.githubusercontent.com/76981768/106841697-ef1aff80-66e5-11eb-80c1-b0d5ec23faeb.png" width="500" height="300">
 <img src="https://user-images.githubusercontent.com/76981768/106841705-f215f000-66e5-11eb-8f32-8c9bcf957d31.png" width="500" height="300">
+<img src="https://user-images.githubusercontent.com/76981768/106841697-ef1aff80-66e5-11eb-80c1-b0d5ec23faeb.png" width="500" height="300">
 <img src="https://user-images.githubusercontent.com/76981768/106841711-f3471d00-66e5-11eb-9b9a-e6bd9972385b.png" width="500" height="300">
 
 
